@@ -1,1 +1,1 @@
-worker: echo =================Hello world=================
+worker: dotnet heroku_output/MathQuizBot.dll
