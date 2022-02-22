@@ -1,1 +1,1 @@
-worker: 
+worker: echo abc
