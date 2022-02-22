@@ -6,32 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="Program.fs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="bin\Release\net6.0\MathQuizBot.deps.json" />
-    <Content Include="bin\Release\net6.0\MathQuizBot.runtimeconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Release\net6.0\cs\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\de\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\es\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\fr\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\FSharp.Core.dll" />
-    <None Include="bin\Release\net6.0\it\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\ja\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\ko\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\MathQuizBot.dll" />
-    <None Include="bin\Release\net6.0\MathQuizBot.exe" />
-    <None Include="bin\Release\net6.0\MathQuizBot.pdb" />
-    <None Include="bin\Release\net6.0\pl\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\pt-BR\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\ru\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\tr\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\zh-Hans\FSharp.Core.resources.dll" />
-    <None Include="bin\Release\net6.0\zh-Hant\FSharp.Core.resources.dll" />
   </ItemGroup>
 
 </Project>
