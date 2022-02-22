@@ -1,1 +1,1 @@
-worker: echo abc
+worker: cd heroku_output && MathQuizBot.exe

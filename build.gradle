@@ -1,0 +1,13 @@
+plugins {
+  id 'com.ullink.msbuild' version '3.15'
+}
+
+msbuild {
+    solutionFile = 'MathQuizBot.sln'
+}
+
+task stage(type: Copy, dependsOn: [msbuild]) {
+    from '.'
+    into 'heroku_output'
+    include 'MathQuizBot/bin/Debug/net6.0/**'
+}
