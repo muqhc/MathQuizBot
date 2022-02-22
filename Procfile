@@ -1,1 +1,1 @@
-worker: dotnet heroku_output/MathQuizBot.dll
+worker: 
