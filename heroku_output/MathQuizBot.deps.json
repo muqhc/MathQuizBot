@@ -8,8 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "MathQuizBot/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "6.0.2",
-          "UnmanagedExports": "1.2.7"
+          "FSharp.Core": "6.0.2"
         },
         "runtime": {
           "MathQuizBot.dll": {}
@@ -63,14 +62,6 @@
             "locale": "zh-Hant"
           }
         }
-      },
-      "UnmanagedExports/1.2.7": {
-        "runtime": {
-          "lib/net/RGiesecke.DllExport.Metadata.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
       }
     }
   },
@@ -86,13 +77,6 @@
       "sha512": "sha512-8GZqv6buY71KQlWT+cl2eMi+aNX9xQ61RgI3Pzv9zPxPOX6tWCLRrBj0MYQ3h871r2RhiHUl7f0AXUD/POr8eA==",
       "path": "fsharp.core/6.0.2",
       "hashPath": "fsharp.core.6.0.2.nupkg.sha512"
-    },
-    "UnmanagedExports/1.2.7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bPIbzFaAj4AFxjHGFGPrYnUSCyIWJMkT/LFuiphWdpUbO2L9fP68W/1SP9cHCAxgiekV+kFNbybA2VvRo8PYIQ==",
-      "path": "unmanagedexports/1.2.7",
-      "hashPath": "unmanagedexports.1.2.7.nupkg.sha512"
     }
   }
 }
