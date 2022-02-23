@@ -6,8 +6,8 @@ msbuild {
     solutionFile = 'MathQuizBot.sln'
 }
 
-task stage(type: Copy, dependsOn: [msbuild]) {
-    from '.'
+task testH(type: Copy, dependsOn: [msbuild]) {
+    from 'MathQuizBot/bin/Debug/net6.0'
     into 'heroku_output'
-    include 'MathQuizBot/bin/Debug/net6.0/**'
+    include '**'
 }

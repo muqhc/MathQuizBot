@@ -364,5 +364,4 @@ FodyWeavers.xsd
 
 # ========== Gradle ===========
 build/
-heroku_output/
 .gradle/
