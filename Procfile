@@ -1,1 +1,1 @@
-worker: cd heroku_output && wine MathQuizBot.exe
+worker: heroku_output/MathQuizBot
