@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Procfile = Procfile
 	EndProjectSection
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "MathQuizBot", "MathQuizBot\MathQuizBot.fsproj", "{76021443-3325-46EB-AAF8-303B921395CA}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "MathQuizBot", "MathQuizBot\MathQuizBot.fsproj", "{F22E19D2-DD10-4E47-95A2-1E1D6D004E0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,10 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{76021443-3325-46EB-AAF8-303B921395CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76021443-3325-46EB-AAF8-303B921395CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76021443-3325-46EB-AAF8-303B921395CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76021443-3325-46EB-AAF8-303B921395CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22E19D2-DD10-4E47-95A2-1E1D6D004E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22E19D2-DD10-4E47-95A2-1E1D6D004E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22E19D2-DD10-4E47-95A2-1E1D6D004E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22E19D2-DD10-4E47-95A2-1E1D6D004E0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

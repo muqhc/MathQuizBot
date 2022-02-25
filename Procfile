@@ -1,1 +1,1 @@
-worker: heroku_output/MathQuizBot
+worker: heroku_output/MathQuizBot.Runner
