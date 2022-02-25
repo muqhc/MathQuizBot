@@ -4,6 +4,7 @@ open Discord
 open Discord.WebSocket
 open Discord.Commands
 open System
+open System.Threading
 open System.Threading.Tasks
 
 let logging (log: LogMessage) = log.ToString() |> printf "\n%s"
@@ -28,10 +29,10 @@ let run (args: string[]) =
 
         client.add_Ready <| Command.registerGuild 946407404201979954UL (Commands.PingCommand()) client 
 
-        while true do ignore |> ignore
+        Thread.Sleep(-1)
     }
 
 [<EntryPoint>]
 let main (args: string[]): int =
-    run args |> Async.AwaitTask |> ignore
+    run args |> ignore
     0
