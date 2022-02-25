@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Command\Command.fs" />
-    <Compile Include="Command\PingCommand.fs" />
+    <Compile Include="Commands\Command.fs" />
+    <Compile Include="Commands\PingCommand.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

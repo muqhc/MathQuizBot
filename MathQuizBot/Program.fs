@@ -5,7 +5,6 @@ open Discord.WebSocket
 open Discord.Commands
 open System
 open System.Threading
-open System.Threading.Tasks
 
 let logging (log: LogMessage) = log.ToString() |> printfn "%s"
 

@@ -18,4 +18,12 @@ let registerGuild (guildId: uint64) (command: ICommand) (client: DiscordSocketCl
     builder.Build() |> guild.CreateApplicationCommandAsync |> Async.AwaitTask |> ignore
     })
 
+let registerGlobal (command: ICommand) (client: DiscordSocketClient): System.Func<Task> = System.Func<_>(fun () -> task {
+    let builder = SlashCommandBuilder()
+    builder.Name <- command.Name
+    builder.Description <- command.Description
+    client.add_SlashCommandExecuted (fun it -> if it.Data.Name = command.Name then command.handle it else task{printf ""})
+    builder.Build() |> client.CreateGlobalApplicationCommandAsync |> Async.AwaitTask |> ignore
+    })
+
 
