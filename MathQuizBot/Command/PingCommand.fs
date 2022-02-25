@@ -15,7 +15,7 @@ type PingCommand() =
                 .WithCurrentTimestamp()
                 .Build()
             |> fun em -> command.RespondAsync ("",[|em|]) |> Async.AwaitTask |> ignore
-            (command.User.Username, command.User.Id.ToString()) ||> printfn "'/ping' called by %s ( %s )"
+            (command.User.Username, command.User.Id.ToString()) ||> printfn "'/ping' called by %s(%s)"
             }
         
 
