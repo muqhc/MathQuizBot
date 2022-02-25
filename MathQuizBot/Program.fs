@@ -6,7 +6,7 @@ open Discord.Commands
 open System
 open System.Threading.Tasks
 
-let logging (log: LogMessage) = log.ToString() |> printf "%s"
+let logging (log: LogMessage) = log.ToString() |> printf "\n%s"
 
 let run (args: string[]) = 
     task {
@@ -26,7 +26,7 @@ let run (args: string[]) =
         client.LoginAsync (TokenType.Bot, token) |> Async.AwaitTask |> ignore
         client.StartAsync () |> Async.AwaitTask |> ignore
 
-        (client.add_Ready) <| Command.registerGuild 946407404201979954UL (Commands.PingCommand()) client 
+        client.add_Ready <| Command.registerGuild 946407404201979954UL (Commands.PingCommand()) client 
 
         while true do ignore |> ignore
     }
