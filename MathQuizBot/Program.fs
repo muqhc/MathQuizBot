@@ -7,7 +7,7 @@ open System
 open System.Threading
 open System.Threading.Tasks
 
-let logging (log: LogMessage) = log.ToString() |> printf "\n%s"
+let logging (log: LogMessage) = log.ToString() |> printfn "%s"
 
 let run (args: string[]) = 
     task {
