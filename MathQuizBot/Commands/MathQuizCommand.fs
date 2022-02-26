@@ -1,6 +1,7 @@
 ﻿namespace MathQuizBot.Commands
 
 open Discord
+open System
 open System.Collections.Immutable
 
 open MathQuizBot.Command
@@ -24,7 +25,7 @@ type MathQuizCommand(client: WebSocket.DiscordSocketClient) =
         member this.handle(cmd: WebSocket.SocketSlashCommand): unit = 
             let value = match cmd.Data.Options.ToImmutableArray().[0].Value with
                         | null -> this.DefaultDifficulty
-                        | it -> it :?> int
+                        | it -> Convert.ToInt32(it :?> int64)
             MathQuizModal(client,value) |> publishModal client
             |> cmd.RespondWithModalAsync |> Async.AwaitTask |> ignore
 
