@@ -1,8 +1,6 @@
 ﻿namespace MathQuizBot.Modals
 
 open Discord
-open System
-open System.Collections
 open System.Collections.Immutable
 
 open MathQuizBot.Modal
