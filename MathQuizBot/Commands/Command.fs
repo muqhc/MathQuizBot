@@ -7,23 +7,25 @@ open System.Threading.Tasks
 type ICommand =
     abstract Name: string
     abstract Description: string
-    abstract handle: SocketSlashCommand -> Task
+    abstract handle: SocketSlashCommand -> unit
 
-let registerGuild (guildId: uint64) (command: ICommand) (client: DiscordSocketClient): System.Func<Task> = System.Func<_>(fun () -> task {
-    let guild = client.GetGuild(guildId)
-    let builder = SlashCommandBuilder()
-    builder.Name <- command.Name
-    builder.Description <- command.Description
-    client.add_SlashCommandExecuted (fun it -> if it.Data.Name = command.Name then command.handle it else task{printf ""})
-    builder.Build() |> guild.CreateApplicationCommandAsync |> Async.AwaitTask |> ignore
+let publishCmdGuild (client: DiscordSocketClient) (guildIds: uint64[]) (commands: ICommand[]): System.Func<Task> = System.Func<_>(fun () -> task {
+    let guilds = [|for id in guildIds do client.GetGuild id|]
+    for command in commands do
+        SlashCommandBuilder()
+            .WithName(command.Name)
+            .WithDescription(command.Description)
+            .Build() |> fun cmd -> for guild in guilds do guild.CreateApplicationCommandAsync cmd |> Async.AwaitTask |> ignore
+        client.add_SlashCommandExecuted (fun it -> task{if it.Data.Name = command.Name then command.handle it })
     })
 
-let registerGlobal (command: ICommand) (client: DiscordSocketClient): System.Func<Task> = System.Func<_>(fun () -> task {
-    let builder = SlashCommandBuilder()
-    builder.Name <- command.Name
-    builder.Description <- command.Description
-    client.add_SlashCommandExecuted (fun it -> if it.Data.Name = command.Name then command.handle it else task{printf ""})
-    builder.Build() |> client.CreateGlobalApplicationCommandAsync |> Async.AwaitTask |> ignore
+let publishCmdGlobal (client: DiscordSocketClient) (commands: ICommand[]): System.Func<Task> = System.Func<Task>(fun () -> task {
+    for command in commands do
+        SlashCommandBuilder()
+            .WithName(command.Name)
+            .WithDescription(command.Description)
+            .Build() |> client.CreateGlobalApplicationCommandAsync |> Async.AwaitTask |> ignore
+        client.add_SlashCommandExecuted (fun it -> task{if it.Data.Name = command.Name then command.handle it })
     })
 
 

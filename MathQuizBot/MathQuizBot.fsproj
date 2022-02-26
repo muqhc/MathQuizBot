@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Modals\Modal.fs" />
+    <Compile Include="Modals\FoodModal.fs" />
     <Compile Include="Commands\Command.fs" />
+    <Compile Include="Commands\FoodCommand.fs" />
     <Compile Include="Commands\PingCommand.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
