@@ -22,7 +22,7 @@ type MathQuizModal(difficulty: int) =
                     .WithTitle(if isCorrect then "You Win!" else "Fail...")
                     .WithDescription(
                             ($"Your answer is {input} \n")+
-                            (if isCorrect then "And " else "But ") + (this.Quiz.ToString()) + ($"{this.Quiz.calculate}")
+                            (if isCorrect then "And " else "But ") + (this.Quiz.ToString()) + ($" = {this.Quiz.calculate}")
                         )
                     .WithColor(if isCorrect then Color.Green else Color.Red)
                     .WithAuthor(smd.User)
