@@ -10,7 +10,6 @@
     <Compile Include="MathQuiz\MathQuiz.fs" />
     <Compile Include="Modals\Modal.fs" />
     <Compile Include="Modals\FoodModal.fs" />
-    <Compile Include="Modals\QuizResultModal.fs" />
     <Compile Include="Modals\MathQuizModal.fs" />
     <Compile Include="Commands\Command.fs" />
     <Compile Include="Commands\PingCommand.fs" />

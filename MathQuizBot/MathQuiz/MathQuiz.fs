@@ -22,7 +22,7 @@ type Calc =
             | Op.Minus -> (-) this.backValue
     end
 
-let (|Calc|) (calc: Calc) = (calc.opLet, (calc.op |> unbox) + calc.backValue.ToString())
+let (|Calc|) (calc: Calc) = (calc.opLet, (calc.op |> unbox<char>).ToString() + calc.backValue.ToString())
 
 [<AbstractClass>]
 type Quiz() = 

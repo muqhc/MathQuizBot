@@ -26,6 +26,6 @@ type MathQuizCommand(client: WebSocket.DiscordSocketClient) =
             let value = match cmd.Data.Options.ToImmutableArray().[0].Value with
                         | null -> this.DefaultDifficulty
                         | it -> Convert.ToInt32(it :?> int64)
-            MathQuizModal(client,value) |> publishModal client
+            MathQuizModal(value) |> publishModal client
             |> cmd.RespondWithModalAsync |> Async.AwaitTask |> ignore
 
