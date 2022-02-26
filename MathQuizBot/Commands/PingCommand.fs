@@ -6,7 +6,7 @@ open MathQuizBot.Command
 
 type PingCommand() =
     interface ICommand with
-        member this.Options: SlashCommandOptionBuilder[] = [||]
+        member this.Options: SlashCommandOptionBuilder[] = null
         member this.Name: string = "ping"
         member this.Description: string = "Ping Pong!"
         member this.handle (cmd: SocketSlashCommand) =
