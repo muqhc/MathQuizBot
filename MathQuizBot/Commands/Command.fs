@@ -3,10 +3,12 @@
 open Discord
 open Discord.WebSocket
 open System.Threading.Tasks
+open System
 
 type ICommand =
     abstract Name: string
     abstract Description: string
+    abstract Options: SlashCommandOptionBuilder[]
     abstract handle: SocketSlashCommand -> unit
 
 let publishCmdGuild (client: DiscordSocketClient) (guildIds: uint64[]) (commands: ICommand[]): System.Func<Task> = System.Func<_>(fun () -> task {
@@ -15,6 +17,7 @@ let publishCmdGuild (client: DiscordSocketClient) (guildIds: uint64[]) (commands
         SlashCommandBuilder()
             .WithName(command.Name)
             .WithDescription(command.Description)
+            .AddOptions(command.Options)
             .Build() |> fun cmd -> for guild in guilds do guild.CreateApplicationCommandAsync cmd |> Async.AwaitTask |> ignore
         client.add_SlashCommandExecuted (fun it -> task{if it.Data.Name = command.Name then command.handle it })
     })
@@ -24,6 +27,7 @@ let publishCmdGlobal (client: DiscordSocketClient) (commands: ICommand[]): Syste
         SlashCommandBuilder()
             .WithName(command.Name)
             .WithDescription(command.Description)
+            .AddOptions(command.Options)
             .Build() |> client.CreateGlobalApplicationCommandAsync |> Async.AwaitTask |> ignore
         client.add_SlashCommandExecuted (fun it -> task{if it.Data.Name = command.Name then command.handle it })
     })

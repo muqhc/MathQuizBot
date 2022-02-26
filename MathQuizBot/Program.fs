@@ -6,6 +6,8 @@ open Discord.Commands
 open System
 open System.Threading
 
+open MathQuizBot.Commands
+
 let logging (log: LogMessage) = log.ToString() |> printfn "%s"
 
 let run (args: string[]) = 
@@ -27,8 +29,9 @@ let run (args: string[]) =
         client.StartAsync () |> Async.AwaitTask |> ignore
 
         client.add_Ready <| Command.publishCmdGuild client [|946407404201979954UL|] [|
-            Commands.PingCommand()
-            Commands.FoodCommand(client)
+            PingCommand()
+            FoodCommand(client)
+            MathQuizCommand(client)
         |] 
 
         Thread.Sleep(-1)
