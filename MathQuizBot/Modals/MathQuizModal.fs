@@ -8,21 +8,23 @@ open MathQuizBot.Modal
 open MathQuizBot.MathQuiz
 
 type MathQuizModal(difficulty: int) =
-    member this.Quiz = genQuiz difficulty
+    let quiz = genQuiz difficulty
+    do printfn $"{difficulty} | {quiz.ToString()} = {quiz.calculate}"
     interface IModal with
         member this.Id: string = "math-quiz"
         member this.Title: string = "Math Quiz!"
         member this.Builder: ModalBuilder = ModalBuilder()
-                                                .AddTextInput(this.Quiz.ToString()+" = ?","quiz-blank",placeholder="Write Number")
+                                                .AddTextInput(quiz.ToString()+" = ?","quiz-blank",placeholder="Write Number")
         member this.onSubmitted(smd: WebSocket.SocketModal): unit = 
             let input = Convert.ToInt32(smd.Data.Components.ToImmutableList().Find(fun data -> data.CustomId = "quiz-blank").Value)
-            let isCorrect = this.Quiz.calculate = input
+            let isCorrect = quiz.calculate = input
+            printfn $"{difficulty} | {quiz.ToString()} = {quiz.calculate} | {input}"
             smd.RespondAsync(embed=
                 EmbedBuilder()
                     .WithTitle(if isCorrect then "You Win!" else "Fail...")
                     .WithDescription(
                             ($"Your answer is {input} \n")+
-                            (if isCorrect then "And " else "But ") + (this.Quiz.ToString()) + ($" = {this.Quiz.calculate}")
+                            (if isCorrect then "And " else "But ") + (quiz.ToString()) + ($" = {quiz.calculate}")
                         )
                     .WithColor(if isCorrect then Color.Green else Color.Red)
                     .WithAuthor(smd.User)
