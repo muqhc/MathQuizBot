@@ -28,7 +28,7 @@ let run (args: string[]) =
         client.LoginAsync (TokenType.Bot, token) |> Async.AwaitTask |> ignore
         client.StartAsync () |> Async.AwaitTask |> ignore
 
-        client.add_Ready <| Command.publishCmdGuild client [|946407404201979954UL|] [|
+        client.add_Ready <| Command.publishCmdGlobal client [|
             PingCommand()
             FoodCommand(client)
             MathQuizCommand(client)
