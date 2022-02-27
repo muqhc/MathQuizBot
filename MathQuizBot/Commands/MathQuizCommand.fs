@@ -23,9 +23,8 @@ type MathQuizCommand(client: WebSocket.DiscordSocketClient) =
                     .WithDescription("difficulty number ; the more high, more difficult")
             |]
         member this.handle(cmd: WebSocket.SocketSlashCommand): unit = 
-            let value = match cmd.Data.Options.ToImmutableArray().[0].Value with
-                        | null -> this.DefaultDifficulty
-                        | it -> Convert.ToInt32(it :?> int64)
+            let value = try Convert.ToInt32(cmd.Data.Options.ToImmutableArray().[0].Value :?> int64) with 
+                        | :? System.IndexOutOfRangeException -> this.DefaultDifficulty
             MathQuizModal(value) |> publishModal client
             |> cmd.RespondWithModalAsync |> Async.AwaitTask |> ignore
 
