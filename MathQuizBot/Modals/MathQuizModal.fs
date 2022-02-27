@@ -11,7 +11,7 @@ type MathQuizModal(difficulty: int) =
     let quiz = genQuiz difficulty
     do printfn $"{difficulty} | {quiz.ToString()} = {quiz.calculate}"
     interface IModal with
-        member this.Id: string = "math-quiz"
+        member this.Id: string = "math-quiz" + $"{this.GetHashCode()}"
         member this.Title: string = "Math Quiz!"
         member this.Builder: ModalBuilder = ModalBuilder()
                                                 .AddTextInput(quiz.ToString()+" = ?","quiz-blank",placeholder="Write Number")

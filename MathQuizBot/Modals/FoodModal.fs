@@ -7,7 +7,7 @@ open MathQuizBot.Modal
 
 type FoodModal() =
     interface IModal with
-        member this.Id: string = "fav-food"
+        member this.Id: string = "fav-food" + $"{this.GetHashCode()}"
         member this.Title: string = "Your Favorite Food"
         member this.Builder: ModalBuilder = ModalBuilder()
                                                 .AddTextInput("What's your fav food?","food-name",placeholder="")
