@@ -9,7 +9,7 @@ open MathQuizBot.MathQuiz
 
 type MathQuizModal(difficulty: int) =
     let quiz = genQuiz difficulty
-    do printfn $"{difficulty} | {quiz.ToString()} = {quiz.calculate}"
+    do printfn $"difficulty:{difficulty} @ {quiz.ToString()} = {quiz.calculate}"
     interface IModal with
         member this.Id: string = "math-quiz" + $"{this.GetHashCode()}"
         member this.Title: string = "Math Quiz!"
@@ -18,7 +18,7 @@ type MathQuizModal(difficulty: int) =
         member this.onSubmitted(smd: WebSocket.SocketModal): unit = 
             let input = Convert.ToInt32(smd.Data.Components.ToImmutableList().Find(fun data -> data.CustomId = "quiz-blank").Value)
             let isCorrect = quiz.calculate = input
-            printfn $"{difficulty} | {quiz.ToString()} = {quiz.calculate} | {input}"
+            printfn $"difficulty:{difficulty} @ {quiz.ToString()} = {quiz.calculate} (user_answer:{input})"
             smd.RespondAsync(embed=
                 EmbedBuilder()
                     .WithTitle(if isCorrect then "You Win!" else "Fail...")
