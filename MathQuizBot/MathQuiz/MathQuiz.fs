@@ -16,13 +16,15 @@ type Calc =
             backValue=value
             }
         
-        member this.opLet = 
+        member this.calcLet = 
             match this.op with
             | Op.Plus -> (+) this.backValue
             | Op.Minus -> (+) (-this.backValue)
+        
+        member this.calcText = (this.op |> unbox<char>).ToString() + this.backValue.ToString()
     end
 
-let (|Calc|) (calc: Calc) = (calc.opLet, (calc.op |> unbox<char>).ToString() + calc.backValue.ToString())
+let (|Calc|) (calc: Calc) = (calc.calcLet, calc.calcText)
 
 [<AbstractClass>]
 type Quiz() = 
