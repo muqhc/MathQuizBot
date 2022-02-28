@@ -38,13 +38,16 @@ type Quiz() =
         |> (+) (this.StartNum.ToString())
 
 let genQuiz difficulty =
+    let scale = match Environment.GetEnvironmentVariable "DIFFICULTY_SCALE" with
+                | null -> 6
+                | it -> Convert.ToInt32 it
     let random = Random()
-    let startNum = random.Next(1,difficulty*5)
+    let startNum = random.Next(1,difficulty*scale)
     let calcs = [|
                 for i in 1..difficulty do
                     Calc(
                         Op.GetValues()[Random.Shared.Next(Enum.GetValues(typedefof<Op>).Length)],
-                        Random.Shared.Next(1,difficulty*5)
+                        Random.Shared.Next(1,difficulty*scale)
                         )
                 |]
     { new Quiz() with 
