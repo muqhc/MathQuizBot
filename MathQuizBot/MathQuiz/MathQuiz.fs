@@ -31,7 +31,7 @@ type Quiz() =
     abstract Seqs: Calc[]
     abstract StartNum: int
 
-    member this.calculate = (this.StartNum,this.Seqs) ||> Array.fold (fun (state: int) (Calc(op,sign)) -> op state )
+    member this.calculate = (this.StartNum,this.Seqs) ||> Array.fold (fun (state: int) (Calc(calc,_)) -> calc state )
 
     override this.ToString() =
         this.Seqs
