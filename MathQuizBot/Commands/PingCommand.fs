@@ -12,7 +12,6 @@ type PingCommand() =
         member this.handle (cmd: SocketSlashCommand) =
             EmbedBuilder()
                 .WithTitle("Pong!")
-                .WithDescription((-) (System.DateTime.Now.Millisecond) (cmd.CreatedAt.Millisecond) |> sprintf "~ %d ms")
                 .WithCurrentTimestamp()
                 .Build() |> fun em -> cmd.RespondAsync (embed=em) |> Async.AwaitTask |> ignore
             (cmd.User.Username, cmd.User.Id.ToString()) ||> printfn "'/ping' called by %s(%s)"
