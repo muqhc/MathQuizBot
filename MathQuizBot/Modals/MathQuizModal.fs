@@ -19,17 +19,19 @@ type MathQuizModal(difficulty: int) =
             let input = Convert.ToInt32(smd.Data.Components.ToImmutableList().Find(fun data -> data.CustomId = "quiz-blank").Value)
             let isCorrect = quiz.calculate = input
             printfn $"difficulty:{difficulty} @ {quiz.ToString()} = {quiz.calculate} (user_answer:{input})"
-            smd.RespondAsync(embed=
-                EmbedBuilder()
-                    .WithTitle(if isCorrect then "You Win!" else "Fail...")
-                    .WithDescription(
-                            ($"Your answer is {input} \n")+
-                            (if isCorrect then "And " else "But ") + (quiz.ToString()) + ($" = {quiz.calculate}")
-                        )
-                    .WithColor(if isCorrect then Color.Green else Color.Red)
-                    .WithAuthor(smd.User)
-                    .WithCurrentTimestamp()
-                    .Build()
+            smd.RespondAsync(
+                embed=
+                    EmbedBuilder()
+                        .WithTitle(if isCorrect then "You Win!" else "Fail...")
+                        .WithDescription(
+                                ($"Your answer is {input} \n")+
+                                (if isCorrect then "And " else "But ") + (quiz.ToString()) + ($" = {quiz.calculate}")
+                            )
+                        .WithColor(if isCorrect then Color.Green else Color.Red)
+                        .WithAuthor(smd.User)
+                        .WithCurrentTimestamp()
+                        .WithFooter($"difficulty : {difficulty} ")
+                        .Build()
             ) |> Async.AwaitTask |> ignore
             
 
