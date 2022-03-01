@@ -16,3 +16,9 @@ let publishModal (client: DiscordSocketClient) (imodel: IModal): Modal =
         .WithCustomId(imodel.Id)
         .WithTitle(imodel.Title)
         .Build()
+
+let publishedModal (imodel: IModal): Modal =
+    imodel.Builder
+        .WithCustomId(imodel.Id)
+        .WithTitle(imodel.Title)
+        .Build()

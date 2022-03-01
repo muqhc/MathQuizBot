@@ -46,7 +46,7 @@ let genQuiz difficulty =
     let random = Random()
     let startNum = random.Next(1,difficulty*scale)
     let calcs = [|
-                for i in 1..difficulty do
+                for _ in 1..difficulty do
                     Calc(
                         Op.GetValues()[Random.Shared.Next(Enum.GetValues(typedefof<Op>).Length)],
                         Random.Shared.Next(1,difficulty*scale)

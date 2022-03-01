@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="HeadInterfaces\Button.fs" />
+    <Compile Include="HeadInterfaces\Modal.fs" />
+    <Compile Include="HeadInterfaces\Command.fs" />
     <Compile Include="MathQuiz\MathQuiz.fs" />
-    <Compile Include="Modals\Modal.fs" />
+    <Compile Include="Components\Buttons\QuizRetryButton.fs" />
     <Compile Include="Modals\FoodModal.fs" />
     <Compile Include="Modals\MathQuizModal.fs" />
-    <Compile Include="Commands\Command.fs" />
     <Compile Include="Commands\PingCommand.fs" />
     <Compile Include="Commands\FoodCommand.fs" />
     <Compile Include="Commands\MathQuizCommand.fs" />

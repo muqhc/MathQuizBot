@@ -4,14 +4,16 @@ open Discord
 open System
 open System.Collections.Immutable
 
+open MathQuizBot.Components.Button
+open MathQuizBot.Components.Buttons
 open MathQuizBot.Modal
 open MathQuizBot.MathQuiz
 
-type MathQuizModal(difficulty: int) =
+type MathQuizModal(difficulty: int,client: WebSocket.DiscordSocketClient) =
     let quiz = genQuiz difficulty
     do printfn $"difficulty:{difficulty} @ {quiz.ToString()} = {quiz.calculate}"
     interface IModal with
-        member this.Id: string = "math-quiz" + $"{this.GetHashCode()}"
+        member this.Id: string = "math-quiz:" + $"{this.GetHashCode()}"
         member this.Title: string = "Math Quiz!"
         member this.Builder: ModalBuilder = ModalBuilder()
                                                 .AddTextInput(quiz.ToString()+" = ?","quiz-blank",placeholder="Write Number")
@@ -31,6 +33,10 @@ type MathQuizModal(difficulty: int) =
                         .WithAuthor(smd.User)
                         .WithCurrentTimestamp()
                         .WithFooter($"difficulty : {difficulty} ")
+                        .Build(),
+                components=
+                    ComponentBuilder()
+                        .WithButton(QuizRetryButton(client,isCorrect,MathQuizModal(difficulty,client)) |> publishButton client)
                         .Build()
             ) |> Async.AwaitTask |> ignore
             
