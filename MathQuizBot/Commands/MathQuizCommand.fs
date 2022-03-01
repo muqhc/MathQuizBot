@@ -5,6 +5,8 @@ open System
 open System.Collections.Immutable
 
 open MathQuizBot.Command
+open MathQuizBot.Components.Buttons
+open MathQuizBot.Components.Button
 open MathQuizBot.Modal
 open MathQuizBot.Modals
 
@@ -30,5 +32,11 @@ type MathQuizCommand(client: WebSocket.DiscordSocketClient) =
                     MathQuizModal(value,client) |> publishModal client
                     |> cmd.RespondWithModalAsync |> Async.AwaitTask |> ignore
                 else
-                    cmd.RespondAsync($"difficulty max is 13, not allow {value}",ephemeral=true) |> Async.AwaitTask |> ignore
+                    cmd.RespondAsync($"※ difficulty max is 13, not allow {value}",
+                        ephemeral=true,
+                        components=
+                            ComponentBuilder()
+                                    .WithButton(QuizRetryButton(client,false,MathQuizModal(13,client)," with 13 difficulty") |> publishButton client)
+                                    .Build()
+                        ) |> Async.AwaitTask |> ignore
 

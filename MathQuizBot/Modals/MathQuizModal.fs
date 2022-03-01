@@ -42,6 +42,12 @@ type MathQuizModal(difficulty: int,client: WebSocket.DiscordSocketClient) =
                                 .Build()
                     ) |> Async.AwaitTask |> ignore
                 else
-                    smd.RespondAsync($"You can write only numbers, not allow this text, \"{input}\"",ephemeral=true) |> Async.AwaitTask |> ignore
+                    smd.RespondAsync($"※ You can write only numbers, not allow this text, \"{input}\"",
+                        ephemeral=true,
+                        components=
+                            ComponentBuilder()
+                                .WithButton(QuizRetryButton(client,isCorrect,MathQuizModal(difficulty,client)) |> publishButton client)
+                                .Build()
+                        ) |> Async.AwaitTask |> ignore
             
 

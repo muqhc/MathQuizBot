@@ -5,10 +5,12 @@ open MathQuizBot.Components.Button
 open MathQuizBot.MathQuiz
 open MathQuizBot.Modal
 
-type QuizRetryButton(client: WebSocket.DiscordSocketClient,isCorrect: bool,imodal: IModal) =
+type QuizRetryButton(client: WebSocket.DiscordSocketClient,isCorrect: bool,imodal: IModal,?additionalText: string) =
     interface IButton with
         member this.Id: string = $"retry-button:{this.GetHashCode()}"
-        member this.Label: string = "Try again"
+        member this.Label: string = "Try again" + match additionalText with
+                                                  | Some(it) -> it
+                                                  | None -> ""
         member this.Builder: Discord.ButtonBuilder = ButtonBuilder()
                                                         .WithStyle(if isCorrect then ButtonStyle.Success else ButtonStyle.Danger)
         member this.onExcuted(smc: Discord.WebSocket.SocketMessageComponent): unit = 
