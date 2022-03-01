@@ -25,6 +25,10 @@ type MathQuizCommand(client: WebSocket.DiscordSocketClient) =
         member this.handle(cmd: WebSocket.SocketSlashCommand): unit = 
             let value = try Convert.ToInt32(cmd.Data.Options.ToImmutableArray().[0].Value :?> int64) with 
                         | :? System.IndexOutOfRangeException -> this.DefaultDifficulty
-            MathQuizModal(value,client) |> publishModal client
-            |> cmd.RespondWithModalAsync |> Async.AwaitTask |> ignore
+            if value < 14 
+                then
+                    MathQuizModal(value,client) |> publishModal client
+                    |> cmd.RespondWithModalAsync |> Async.AwaitTask |> ignore
+                else
+                    cmd.RespondAsync($"difficulty max is 13, not allow {value}",ephemeral=true) |> Async.AwaitTask |> ignore
 

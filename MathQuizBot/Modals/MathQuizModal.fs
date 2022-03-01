@@ -18,26 +18,30 @@ type MathQuizModal(difficulty: int,client: WebSocket.DiscordSocketClient) =
         member this.Builder: ModalBuilder = ModalBuilder()
                                                 .AddTextInput(quiz.ToString()+" = ?","quiz-blank",placeholder="Write Number")
         member this.onSubmitted(smd: WebSocket.SocketModal): unit = 
-            let input = Convert.ToInt32(smd.Data.Components.ToImmutableList().Find(fun data -> data.CustomId = "quiz-blank").Value)
-            let isCorrect = quiz.calculate = input
+            let input = smd.Data.Components.ToImmutableList().Find(fun data -> data.CustomId = "quiz-blank").Value
+            let isCorrect = quiz.calculate.ToString() = input
             printfn $"difficulty:{difficulty} @ {quiz.ToString()} = {quiz.calculate} (user_answer:{input})"
-            smd.RespondAsync(
-                embed=
-                    EmbedBuilder()
-                        .WithTitle(if isCorrect then "You Win!" else "Fail...")
-                        .WithDescription(
-                                ($"Your answer is {input} \n")+
-                                (if isCorrect then "And " else "But ") + (quiz.ToString()) + ($" = {quiz.calculate}")
-                            )
-                        .WithColor(if isCorrect then Color.Green else Color.Red)
-                        .WithAuthor(smd.User)
-                        .WithCurrentTimestamp()
-                        .WithFooter($"difficulty : {difficulty} ")
-                        .Build(),
-                components=
-                    ComponentBuilder()
-                        .WithButton(QuizRetryButton(client,isCorrect,MathQuizModal(difficulty,client)) |> publishButton client)
-                        .Build()
-            ) |> Async.AwaitTask |> ignore
+            if numberCheck input
+                then
+                    smd.RespondAsync(
+                        embed=
+                            EmbedBuilder()
+                                .WithTitle(if isCorrect then "You Win!" else "Fail...")
+                                .WithDescription(
+                                        ($"Your answer is {input} \n")+
+                                        (if isCorrect then "And " else "But ") + (quiz.ToString()) + ($" = {quiz.calculate}")
+                                    )
+                                .WithColor(if isCorrect then Color.Green else Color.Red)
+                                .WithAuthor(smd.User)
+                                .WithCurrentTimestamp()
+                                .WithFooter($"difficulty : {difficulty} ")
+                                .Build(),
+                        components=
+                            ComponentBuilder()
+                                .WithButton(QuizRetryButton(client,isCorrect,MathQuizModal(difficulty,client)) |> publishButton client)
+                                .Build()
+                    ) |> Async.AwaitTask |> ignore
+                else
+                    smd.RespondAsync($"You can write only numbers, not allow this text, \"{input}\"") |> Async.AwaitTask |> ignore
             
 

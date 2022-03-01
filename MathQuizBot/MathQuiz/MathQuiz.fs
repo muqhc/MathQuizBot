@@ -56,3 +56,5 @@ let genQuiz difficulty =
         member this.StartNum = startNum
         member this.Seqs = calcs
     }
+
+let numberCheck = System.Text.RegularExpressions.Regex("^-?[0-9]+$").IsMatch
